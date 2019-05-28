@@ -1678,11 +1678,11 @@ cdef class DB(object):
         if not self.db == NULL:
             # We have to make sure we delete the handles so rocksdb doesn't
             # assert when we delete the db
-            self.cf_handles = []
+            del self.cf_handles[:]
             for copts in self.cf_options:
                 if copts:
                     copts.in_use = False
-            self.cf_options = []
+            del self.cf_options[:]
 
             with nogil:
                 del self.db
