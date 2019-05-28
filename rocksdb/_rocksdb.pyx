@@ -1672,7 +1672,7 @@ cdef class DB(object):
 
     def __dealloc__(self):
         self.close()
-        
+
     def close(self):
         cdef ColumnFamilyOptions copts
         if not self.db == NULL:
@@ -1682,7 +1682,7 @@ cdef class DB(object):
             for copts in self.cf_options:
                 if copts:
                     copts.in_use = False
-            self.cf_options.clear()
+            self.cf_options = []
 
             with nogil:
                 del self.db
